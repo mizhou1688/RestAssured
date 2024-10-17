@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 
 public class ApiTests {
 
-	static final String baseURL = "http://192.168.86.36/api_testing";
+	static final String baseURL = "http://localhost/api_testing";
 	@Test
 	public void getCategories() {
 		String endpoint = baseURL +"/category/read.php";
@@ -221,7 +221,7 @@ public class ApiTests {
 				4,
 				"Supplements"
 		);
-		var response = given().queryParam("id", 18).when().get(endpoint);
+		Response response = given().queryParam("id", 18).when().get(endpoint);
 		response.then().assertThat().statusCode(200).header("Content-Type", equalTo("application/json"));
 		
 		Product actualProduct = response.as(Product.class);
